@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ControlController;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,7 +14,23 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+//Pantalla inicial
+Route::get('/', [LoginController::class, 'showLogin'])->name('ingreso');
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('olvida-clave', [LoginController::class, 'forgetPassword'])->name('olvidaclave');
+
+Route::get('solicita-registro', [LoginController::class, 'register'])->name('solicitaregistro');
+
+//Validar login
+//Route::get('marcaje', [LoginController::class, 'doLogin']);
+
+//Pantallas logeadas
+Route::get('marcaje', [ControlController::class, 'marcaje'])->name('marcaje');
+
+//Route::get('marcaje', [ControlController::class, 'marcajeGuardar'])->name('marcaje');
+
+Route::get('mis-marcas', [ControlController::class, 'miMarcaje'])->name('mismarcas');
+
+Route::get('marcas', [ControlController::class, 'miMarcaje'])->name('marcas')->where('id', '[0-9]+');
+
+
