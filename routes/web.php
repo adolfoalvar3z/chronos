@@ -33,4 +33,5 @@ Route::get('mis-marcas', [ControlController::class, 'miMarcaje'])->name('mismarc
 
 Route::get('marcas', [ControlController::class, 'miMarcaje'])->name('marcas')->where('id', '[0-9]+');
 
+Route::get('salir', [ControlController::class, 'salir'])->name('salir');
 

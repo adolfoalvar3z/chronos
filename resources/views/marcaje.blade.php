@@ -21,6 +21,7 @@
                 <button type="button" class="btn btn-danger btn-lg btn-block">Registrar
                     Salida
                 </button>
+
                 @break
                 @case(2)
                 <h3 class="text-center p-b-10">HAS REGISTRADO TU MARCAJE DE ENTRADA Y
