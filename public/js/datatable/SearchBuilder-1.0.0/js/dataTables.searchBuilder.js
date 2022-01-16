@@ -160,7 +160,7 @@
 		/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 		 * Public
 		 */
-		
+
 		/**
 		 * Destroy the control
 		 */
@@ -292,7 +292,7 @@
 		/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 		 * Constructor
 		 */
-		
+
 		/**
 		 * Build the control and assign initial event handlers
 		 *
@@ -591,7 +591,7 @@
 		 * @private
 		 */
 		_daysInMonth: function ( year, month ) {
-			// 
+			//
 			var isLeap = ((year % 4) === 0 && ((year % 100) !== 0 || (year % 400) === 0));
 			var months = [31, (isLeap ? 29 : 28), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
@@ -696,7 +696,7 @@
 
 		/**
 		 * Create the HTML for a month to be displayed in the calendar table.
-		 * 
+		 *
 		 * Based upon the logic used in Pikaday - MIT licensed
 		 * Copyright (c) 2014 David Bushell
 		 * https://github.com/dbushell/Pikaday
@@ -836,14 +836,14 @@
 
 				return i18n.weekdays[day];
 			};
-			
+
 			// Empty cell in the header
 			if ( this.c.showWeekNumber ) {
-				a.push( '<th></th>' );
+				a.push('<th></th>');
 			}
 
-			for ( var i=0 ; i<7 ; i++ ) {
-				a.push( '<th>'+dayName( i )+'</th>' );
+			for (var i = 0; i < 7; i++) {
+				a.push('<th>' + dayName(i) + '</th>');
 			}
 
 			return a.join('');
@@ -858,19 +858,19 @@
 		 * @param  {integer} d Day of month
 		 * @param  {integer} m Month of year (zero index)
 		 * @param  {integer} y Year
-		 * @return {string}   
+		 * @return {string}
 		 * @private
 		 */
-		_htmlWeekOfYear: function ( d, m, y ) {
-			var date = new Date( y, m, d, 0, 0, 0, 0 );
+		_htmlWeekOfYear: function (d, m, y) {
+			var date = new Date(y, m, d, 0, 0, 0, 0);
 
 			// First week of the year always has 4th January in it
-			date.setDate( date.getDate() + 4 - (date.getDay() || 7) );
+			date.setDate(date.getDate() + 4 - (date.getDay() || 7));
 
-			var oneJan = new Date( y, 0, 1 );
-			var weekNum = Math.ceil( ( ( (date - oneJan) / 86400000) + 1)/7 );
+			var oneJan = new Date(y, 0, 1);
+			var weekNum = Math.ceil((((date - oneJan) / 86400000) + 1) / 7);
 
-			return '<td class="'+this.c.classPrefix+'-week">' + weekNum + '</td>';
+			return '<td class="' + this.c.classPrefix + '-week">' + weekNum + '</td>';
 		},
 
 		/**
@@ -952,7 +952,7 @@
 				var selected = val === value || (value === 'am' && val < 12) || (value === 'pm' && val >= 12) ?
 					'selected' :
 					'';
-				
+
 				if (allowed && $.inArray(value, allowed) === -1) {
 					selected += ' disabled';
 				}
@@ -971,7 +971,7 @@
 			if ( count === 12 ) {
 				// Hours with AM/PM
 				a += '<tr>';
-				
+
 				for ( i=1 ; i<=6 ; i++ ) {
 					a += button(i, render(i));
 				}
@@ -1009,7 +1009,7 @@
 					a += button(j, render(j), 'range');
 				}
 				a += '</tr>';
-				
+
 				// Slight hack to allow for the different number of columns
 				a += '</tbody></thead><table class="'+className+' '+className+'-nospace"><tbody>';
 
@@ -1197,7 +1197,7 @@
 		/**
 		 * Show the widget and add events to the document required only while it
 		 * is displayed
-		 * 
+		 *
 		 * @private
 		 */
 		_show: function () {
@@ -2289,36 +2289,38 @@
 	            inputValue: Criteria.inputValueInput,
 	            isInputValid: Criteria.isInputValidInput,
 	            search: function (value, comparison) {
-	                value = value.replace(/(\/|\-|\,)/g, '-');
-	                if (comparison[0] < comparison[1]) {
-	                    return !(comparison[0] <= value && value <= comparison[1]);
-	                }
-	                else {
-	                    return !(comparison[1] <= value && value <= comparison[0]);
-	                }
-	            }
-	        },
-	        '!null': {
-	            conditionName: 'Not Empty',
-	            isInputValid: function () { return true; },
-	            init: function () { return; },
-	            inputValue: function () {
-	                return;
-	            },
-	            search: function (value, comparison) {
-	                return !(value === null || value === undefined || value.length === 0);
-	            }
-	        },
-	        '<': {
-	            conditionName: 'Before',
-	            init: Criteria.initDate,
-	            inputValue: Criteria.inputValueInput,
-	            isInputValid: Criteria.isInputValidInput,
-	            search: function (value, comparison) {
-	                value = value.replace(/(\/|\-|\,)/g, '-');
-	                return value < comparison[0];
-	            }
-	        },
+					value = value.replace(/(\/|\-|\,)/g, '-');
+					if (comparison[0] < comparison[1]) {
+						return !(comparison[0] <= value && value <= comparison[1]);
+					} else {
+						return !(comparison[1] <= value && value <= comparison[0]);
+					}
+				}
+			},
+			'!null': {
+				conditionName: 'Not Empty',
+				isInputValid: function () {
+					return true;
+				},
+				init: function () {
+				},
+				inputValue: function () {
+
+				},
+				search: function (value, comparison) {
+					return !(value === null || value === undefined || value.length === 0);
+				}
+			},
+			'<': {
+				conditionName: 'Before',
+				init: Criteria.initDate,
+				inputValue: Criteria.inputValueInput,
+				isInputValid: Criteria.isInputValidInput,
+				search: function (value, comparison) {
+					value = value.replace(/(\/|\-|\,)/g, '-');
+					return value < comparison[0];
+				}
+			},
 	        '=': {
 	            conditionName: 'Equals',
 	            init: Criteria.initDate,
@@ -2355,16 +2357,19 @@
 	            }
 	        },
 	        'null': {
-	            conditionName: 'Empty',
-	            isInputValid: function () { return true; },
-	            init: function () { return; },
-	            inputValue: function () {
-	                return;
-	            },
-	            search: function (value, comparison) {
-	                return (value === null || value === undefined || value.length === 0);
-	            }
-	        }
+				conditionName: 'Empty',
+				isInputValid: function () {
+					return true;
+				},
+				init: function () {
+				},
+				inputValue: function () {
+
+				},
+				search: function (value, comparison) {
+					return (value === null || value === undefined || value.length === 0);
+				}
+			}
 	    };
 	    Criteria.momentDateConditions = {
 	        '!=': {
@@ -2384,36 +2389,38 @@
 	            search: function (value, comparison, that) {
 	                var val = moment(value, that.s.momentFormat).valueOf();
 	                var comp0 = moment(comparison[0], that.s.momentFormat).valueOf();
-	                var comp1 = moment(comparison[1], that.s.momentFormat).valueOf();
-	                if (comp0 < comp1) {
-	                    return !(+comp0 <= +val && +val <= +comp1);
-	                }
-	                else {
-	                    return !(+comp1 <= +val && +val <= +comp0);
-	                }
-	            }
-	        },
-	        '!null': {
-	            conditionName: 'Not Empty',
-	            isInputValid: function () { return true; },
-	            init: function () { return; },
-	            inputValue: function () {
-	                return;
-	            },
-	            search: function (value, comparison) {
-	                return !(value === null || value === undefined || value.length === 0);
-	            }
-	        },
-	        '<': {
-	            conditionName: 'Before',
-	            init: Criteria.initDate,
-	            inputValue: Criteria.inputValueInput,
-	            isInputValid: Criteria.isInputValidInput,
-	            search: function (value, comparison, that) {
-	                return moment(value, that.s.momentFormat).valueOf() < moment(comparison[0], that.s.momentFormat).valueOf();
-	            }
-	        },
-	        '=': {
+					var comp1 = moment(comparison[1], that.s.momentFormat).valueOf();
+					if (comp0 < comp1) {
+						return !(+comp0 <= +val && +val <= +comp1);
+					} else {
+						return !(+comp1 <= +val && +val <= +comp0);
+					}
+				}
+			},
+			'!null': {
+				conditionName: 'Not Empty',
+				isInputValid: function () {
+					return true;
+				},
+				init: function () {
+				},
+				inputValue: function () {
+
+				},
+				search: function (value, comparison) {
+					return !(value === null || value === undefined || value.length === 0);
+				}
+			},
+			'<': {
+				conditionName: 'Before',
+				init: Criteria.initDate,
+				inputValue: Criteria.inputValueInput,
+				isInputValid: Criteria.isInputValidInput,
+				search: function (value, comparison, that) {
+					return moment(value, that.s.momentFormat).valueOf() < moment(comparison[0], that.s.momentFormat).valueOf();
+				}
+			},
+			'=': {
 	            conditionName: 'Equals',
 	            init: Criteria.initDate,
 	            inputValue: Criteria.inputValueInput,
@@ -2449,16 +2456,19 @@
 	            }
 	        },
 	        'null': {
-	            conditionName: 'Empty',
-	            isInputValid: function () { return true; },
-	            init: function () { return; },
-	            inputValue: function () {
-	                return;
-	            },
-	            search: function (value, comparison) {
-	                return (value === null || value === undefined || value.length === 0);
-	            }
-	        }
+				conditionName: 'Empty',
+				isInputValid: function () {
+					return true;
+				},
+				init: function () {
+				},
+				inputValue: function () {
+
+				},
+				search: function (value, comparison) {
+					return (value === null || value === undefined || value.length === 0);
+				}
+			}
 	    };
 	    Criteria.numConditions = {
 	        '!=': {
@@ -2475,36 +2485,38 @@
 	            init: Criteria.init2Input,
 	            inputValue: Criteria.inputValueInput,
 	            isInputValid: Criteria.isInputValidInput,
-	            search: function (value, comparison) {
-	                if (+comparison[0] < +comparison[1]) {
-	                    return !(+comparison[0] <= +value && +value <= +comparison[1]);
-	                }
-	                else {
-	                    return !(+comparison[1] <= +value && +value <= +comparison[0]);
-	                }
-	            }
-	        },
-	        '!null': {
-	            conditionName: 'Not Empty',
-	            isInputValid: function () { return true; },
-	            init: function () { return; },
-	            inputValue: function () {
-	                return;
-	            },
-	            search: function (value, comparison) {
-	                return !(value === null || value === undefined || value.length === 0);
-	            }
-	        },
-	        '<': {
-	            conditionName: 'Less Than',
-	            init: Criteria.initInput,
-	            inputValue: Criteria.inputValueInput,
-	            isInputValid: Criteria.isInputValidInput,
-	            search: function (value, comparison) {
-	                return +value < +comparison[0];
-	            }
-	        },
-	        '<=': {
+				search: function (value, comparison) {
+					if (+comparison[0] < +comparison[1]) {
+						return !(+comparison[0] <= +value && +value <= +comparison[1]);
+					} else {
+						return !(+comparison[1] <= +value && +value <= +comparison[0]);
+					}
+				}
+			},
+			'!null': {
+				conditionName: 'Not Empty',
+				isInputValid: function () {
+					return true;
+				},
+				init: function () {
+				},
+				inputValue: function () {
+
+				},
+				search: function (value, comparison) {
+					return !(value === null || value === undefined || value.length === 0);
+				}
+			},
+			'<': {
+				conditionName: 'Less Than',
+				init: Criteria.initInput,
+				inputValue: Criteria.inputValueInput,
+				isInputValid: Criteria.isInputValidInput,
+				search: function (value, comparison) {
+					return +value < +comparison[0];
+				}
+			},
+			'<=': {
 	            conditionName: 'Less Than Equal To',
 	            init: Criteria.initInput,
 	            inputValue: Criteria.inputValueInput,
@@ -2555,14 +2567,18 @@
 	            }
 	        },
 	        'null': {
-	            conditionName: 'Empty',
-	            init: function () { return; },
-	            inputValue: function () { return; },
-	            isInputValid: function () { return true; },
-	            search: function (value, comparison) {
-	                return (value === null || value === undefined || value.length === 0);
-	            }
-	        }
+				conditionName: 'Empty',
+				init: function () {
+				},
+				inputValue: function () {
+				},
+				isInputValid: function () {
+					return true;
+				},
+				search: function (value, comparison) {
+					return (value === null || value === undefined || value.length === 0);
+				}
+			}
 	    };
 	    Criteria.numFmtConditions = {
 	        '!=': {
@@ -2584,36 +2600,38 @@
 	            search: function (value, comparison) {
 	                var val = value.replace(/[^0-9.]/g, '');
 	                var comp0 = comparison[0].replace(/[^0-9.]/g, '');
-	                var comp1 = comparison[1].replace(/[^0-9.]/g, '');
-	                if (comp0 < comp1) {
-	                    return !(+comp0 <= +val && +val <= +comp1);
-	                }
-	                else {
-	                    return !(+comp1 <= +val && +val <= +comp0);
-	                }
-	            }
-	        },
-	        '!null': {
-	            conditionName: 'Not Empty',
-	            isInputValid: function () { return true; },
-	            init: function () { return; },
-	            inputValue: function () {
-	                return;
-	            },
-	            search: function (value, comparison) {
-	                return !(value === null || value === undefined || value.length === 0);
-	            }
-	        },
-	        '<': {
-	            conditionName: 'Less Than',
-	            init: Criteria.initInput,
-	            inputValue: Criteria.inputValueInput,
-	            isInputValid: Criteria.isInputValidInput,
-	            search: function (value, comparison) {
-	                var val = value.replace(/[^0-9.]/g, '');
-	                var comp = comparison[0].replace(/[^0-9.]/g, '');
-	                return +val < +comp;
-	            }
+					var comp1 = comparison[1].replace(/[^0-9.]/g, '');
+					if (comp0 < comp1) {
+						return !(+comp0 <= +val && +val <= +comp1);
+					} else {
+						return !(+comp1 <= +val && +val <= +comp0);
+					}
+				}
+			},
+			'!null': {
+				conditionName: 'Not Empty',
+				isInputValid: function () {
+					return true;
+				},
+				init: function () {
+				},
+				inputValue: function () {
+
+				},
+				search: function (value, comparison) {
+					return !(value === null || value === undefined || value.length === 0);
+				}
+			},
+			'<': {
+				conditionName: 'Less Than',
+				init: Criteria.initInput,
+				inputValue: Criteria.inputValueInput,
+				isInputValid: Criteria.isInputValidInput,
+				search: function (value, comparison) {
+					var val = value.replace(/[^0-9.]/g, '');
+					var comp = comparison[0].replace(/[^0-9.]/g, '');
+					return +val < +comp;
+				}
 	        },
 	        '<=': {
 	            conditionName: 'Less Than Equal To',
@@ -2677,46 +2695,53 @@
 	            }
 	        },
 	        'null': {
-	            conditionName: 'Empty',
-	            init: function () { return; },
-	            inputValue: function () { return; },
-	            isInputValid: function () { return true; },
-	            search: function (value, comparison) {
-	                return (value === null || value === undefined || value.length === 0);
-	            }
-	        }
+				conditionName: 'Empty',
+				init: function () {
+				},
+				inputValue: function () {
+				},
+				isInputValid: function () {
+					return true;
+				},
+				search: function (value, comparison) {
+					return (value === null || value === undefined || value.length === 0);
+				}
+			}
 	    };
 	    Criteria.stringConditions = {
-	        '!=': {
-	            conditionName: 'Not',
-	            init: Criteria.initSelect,
-	            inputValue: Criteria.inputValueSelect,
-	            isInputValid: Criteria.isInputValidInput,
-	            search: function (value, comparison) {
-	                return value !== comparison[0];
-	            }
-	        },
-	        '!null': {
-	            conditionName: 'Not Empty',
-	            isInputValid: function () { return true; },
-	            init: function () { return; },
-	            inputValue: function () {
-	                return;
-	            },
-	            search: function (value, comparison) {
-	                return !(value === null || value === undefined || value.length === 0);
-	            }
-	        },
-	        '=': {
-	            conditionName: 'Equals',
-	            init: Criteria.initSelect,
-	            inputValue: Criteria.inputValueSelect,
-	            isInputValid: Criteria.isInputValidSelect,
-	            search: function (value, comparison) {
-	                return value === comparison[0];
-	            }
-	        },
-	        'contains': {
+			'!=': {
+				conditionName: 'Not',
+				init: Criteria.initSelect,
+				inputValue: Criteria.inputValueSelect,
+				isInputValid: Criteria.isInputValidInput,
+				search: function (value, comparison) {
+					return value !== comparison[0];
+				}
+			},
+			'!null': {
+				conditionName: 'Not Empty',
+				isInputValid: function () {
+					return true;
+				},
+				init: function () {
+				},
+				inputValue: function () {
+
+				},
+				search: function (value, comparison) {
+					return !(value === null || value === undefined || value.length === 0);
+				}
+			},
+			'=': {
+				conditionName: 'Equals',
+				init: Criteria.initSelect,
+				inputValue: Criteria.inputValueSelect,
+				isInputValid: Criteria.isInputValidSelect,
+				search: function (value, comparison) {
+					return value === comparison[0];
+				}
+			},
+			'contains': {
 	            conditionName: 'Contains',
 	            init: Criteria.initInput,
 	            inputValue: Criteria.inputValueInput,
@@ -2725,34 +2750,38 @@
 	                return value.toLowerCase().includes(comparison[0].toLowerCase());
 	            }
 	        },
-	        'ends': {
-	            conditionName: 'Ends With',
-	            init: Criteria.initInput,
-	            inputValue: Criteria.inputValueInput,
-	            isInputValid: Criteria.isInputValidInput,
-	            search: function (value, comparison) {
-	                return value.toLowerCase().indexOf(comparison[0].toLowerCase()) === value.length - comparison[0].length;
-	            }
-	        },
-	        'null': {
-	            conditionName: 'Empty',
-	            init: function () { return; },
-	            inputValue: function () { return; },
-	            isInputValid: function () { return true; },
-	            search: function (value, comparison) {
-	                return (value === null || value === undefined || value.length === 0);
-	            }
-	        },
-	        'starts': {
-	            conditionName: 'Starts With',
-	            init: Criteria.initInput,
-	            inputValue: Criteria.inputValueInput,
-	            isInputValid: Criteria.isInputValidInput,
-	            search: function (value, comparison) {
-	                return value.toLowerCase().indexOf(comparison[0].toLowerCase()) === 0;
-	            }
-	        }
-	    };
+			'ends': {
+				conditionName: 'Ends With',
+				init: Criteria.initInput,
+				inputValue: Criteria.inputValueInput,
+				isInputValid: Criteria.isInputValidInput,
+				search: function (value, comparison) {
+					return value.toLowerCase().indexOf(comparison[0].toLowerCase()) === value.length - comparison[0].length;
+				}
+			},
+			'null': {
+				conditionName: 'Empty',
+				init: function () {
+				},
+				inputValue: function () {
+				},
+				isInputValid: function () {
+					return true;
+				},
+				search: function (value, comparison) {
+					return (value === null || value === undefined || value.length === 0);
+				}
+			},
+			'starts': {
+				conditionName: 'Starts With',
+				init: Criteria.initInput,
+				inputValue: Criteria.inputValueInput,
+				isInputValid: Criteria.isInputValidInput,
+				search: function (value, comparison) {
+					return value.toLowerCase().indexOf(comparison[0].toLowerCase()) === 0;
+				}
+			}
+		};
 	    Criteria.defaults = {
 	        columns: true,
 	        conditions: {
@@ -3162,8 +3191,8 @@
 	            var crit = _a[_i];
 	            // If the criteria is not complete then skip it
 	            if (crit.logic === undefined && !crit.criteria.s.filled) {
-	                continue;
-	            }
+
+				}
 	            // Otherwise if a single one fails return false
 	            else if (!crit.criteria.search(rowData)) {
 	                return false;

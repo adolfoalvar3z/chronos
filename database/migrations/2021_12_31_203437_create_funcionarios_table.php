@@ -16,21 +16,21 @@ class CreateFuncionariosTable extends Migration
         Schema::create('funcionarios', function (Blueprint $table) {
             $table->id('rut')->unique();
             $table->integer('dv');
-            $table->string('nombre');
-            $table->string('appat');
-            $table->string('apmat');
+            $table->string('nombre', 100);
+            $table->string('appat', 50);
+            $table->string('apmat', 50);
             $table->string('direccion')->nullable();
-            $table->string('numdireccion')->nullable();
+            $table->string('numdireccion', 20)->nullable();
             $table->string('bloque')->nullable();
             $table->string('depto')->nullable();
             $table->string('poblacion')->nullable();
-            $table->string('comuna')->nullable();
+            $table->string('comuna', 50)->nullable();
             $table->string('localidad')->nullable();
-            $table->string('region')->nullable();
+            $table->string('region', 50)->nullable();
             $table->string('fonoparticular')->nullable();
             $table->string('celular')->nullable();
             $table->string('fonolaboral')->nullable();
-            $table->string('estadocivil')->nullable();
+            $table->string('estadocivil', 20)->nullable();
             $table->string('jurisdiccion')->nullable();
             $table->string('organica')->nullable();
             $table->string('tipounidad')->nullable();
@@ -57,7 +57,7 @@ class CreateFuncionariosTable extends Migration
             $table->string('profesion')->nullable();
             $table->string('institucionsuperior')->nullable();
             $table->string('seccionadministrativa')->nullable();
-            $table->string('emailinstitucional')->nullable();
+            $table->string('emailinstitucional', 100);
             $table->date('fecingresoalservicio')->nullable();
             $table->date('fecingresoalaplanta')->nullable();
             $table->date('fecingresoalacategoria')->nullable();
@@ -67,6 +67,7 @@ class CreateFuncionariosTable extends Migration
             $table->string('comunaunidad')->nullable();
             $table->string('partida')->nullable();
             $table->string('asientodelaunidad')->nullable();
+            $table->string('tipodeplazacontrata')->nullable();
             $table->string('discapacidadvigente')->nullable();
             $table->timestamps();
         });
